@@ -1,5 +1,9 @@
 .api-table-paging {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
+
+  &,
+  .paging-area {
+    display: flex;
+    align-items: center;
+  }
 }

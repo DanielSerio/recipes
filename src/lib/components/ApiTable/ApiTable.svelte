@@ -1,39 +1,16 @@
 <script lang="ts">
 	import ApiTableService from '$lib/services/api-table.service';
-	import type { Filtering, GetMany, PagingParams, Sorting } from '$lib/types/api.types';
 	import { userStore } from '$stores/user';
-	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
 	import ApiTablePaging from './ApiTablePaging.svelte';
 	import RecordDeleteButton from './RecordDeleteButton.svelte';
+	import useApiTable from '$lib/hooks/api-table';
 
 	export let entityIcon: string;
 	export let entityName: string;
 	export let url: string;
 	export let deleteColumnKey: string;
 	export let fields: App.ApiTableField[];
-	let pagingStore = writable<PagingParams>({
-		limit: 25,
-		offset: 0
-	});
-	let filteringStore = writable<Filtering>({});
-	let sortingStore = writable<Sorting>({});
-	let result: GetMany<object & { [k: string]: any }>;
-
-	async function fetchData() {
-		if ($userStore !== 'LOADING' && $userStore.token) {
-			result = await ApiTableService.getMany(
-				$userStore.token,
-				entityName,
-				{
-					limit: $pagingStore.limit,
-					offset: $pagingStore.offset
-				},
-				{ ...$sortingStore },
-				{ ...$filteringStore }
-			);
-		}
-	}
+	const { resultStore, refresh, pagingStore } = useApiTable(entityName);
 
 	function applyTransforms(
 		field: App.ApiTableField,
@@ -61,40 +38,13 @@
 
 	const availableRecordLimits = [1, 5, 10, 15, 25, 50, 100];
 
-	async function handleRowDelete(id: string) {
+	async function handleRowDelete(record: any) {
+		const id: string = record[deleteColumnKey];
 		if ($userStore !== 'LOADING' && $userStore.token) {
 			await ApiTableService.delete($userStore.token, entityName, id);
-			await fetchData();
+			await refresh();
 		}
 	}
-
-	onMount(async () => {
-		if ($userStore !== 'LOADING') {
-			pagingStore.subscribe(async (value) => {
-				await fetchData();
-			});
-
-			sortingStore.subscribe(async (value) => {
-				if (
-					Object.keys(value) &&
-					result &&
-					JSON.stringify(result.sorting) !== JSON.stringify(value)
-				) {
-					await fetchData();
-				}
-			});
-
-			filteringStore.subscribe(async (value) => {
-				if (
-					Object.keys(value) &&
-					result &&
-					JSON.stringify(result.filtering) !== JSON.stringify(value)
-				) {
-					await fetchData();
-				}
-			});
-		}
-	});
 </script>
 
 <div class="api-table-root">
@@ -143,18 +93,16 @@
 							{/each}
 						</tr>
 					</thead>
-					{#if !result}
+					{#if !$resultStore}
 						<div>No Results</div>
 					{:else}
 						<tbody>
-							{#each result.records as record}
+							{#each $resultStore.records as record}
 								<tr>
 									<td>
 										<div class="t-cell">
 											<span class="col-name">Actions</span>
-											<RecordDeleteButton
-												onDelete={async () => await handleRowDelete(record[deleteColumnKey])}
-											/>
+											<RecordDeleteButton onDelete={async () => await handleRowDelete(record)} />
 										</div>
 									</td>
 									{#each fields as field}
@@ -189,12 +137,13 @@
 			</div>
 		</div>
 		<footer class="api-table-footer">
-			{#if result}
+			{#if $resultStore}
 				<ApiTablePaging
 					availableLimits={availableRecordLimits}
 					{pagingStore}
-					totalPages={result.paging.totals.pages}
-					totalRecords={result.paging.totals.records}
+					{refresh}
+					totalPages={$resultStore.paging.totals.pages}
+					totalRecords={$resultStore.paging.totals.records}
 				/>
 			{/if}
 		</footer>

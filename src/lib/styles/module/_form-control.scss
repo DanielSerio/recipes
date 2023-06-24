@@ -1,0 +1,44 @@
+@import "../config.scss";
+
+.form-control {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 calc(12 / 18) * 1rem;
+  label {
+    font-size: calc(14 / 18) * 1rem;
+    margin-bottom: calc(3 / 18) * 1rem;
+  }
+
+  input {
+    padding: 0 1.5ch;
+  }
+
+  .control-error {
+    font-size: calc(14 / 18) * 1rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    i {
+      height: calc(24 / 18) * 1rem;
+      width: calc(24 / 18) * 1rem;
+      display: grid;
+      place-content: center;
+    }
+  }
+}
+
+.light .control-error {
+  color: $light-danger;
+}
+
+.dark .control-error {
+  color: $dark-danger;
+}
+
+.dark .form-control.error {
+  .label {
+    color: $dark-danger;
+  }
+}

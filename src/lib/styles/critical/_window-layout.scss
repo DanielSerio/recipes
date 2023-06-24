@@ -1,0 +1,27 @@
+.root-layout {
+  position: relative;
+  z-index: -3000;
+  min-height: 100vh;
+
+  &,
+  & > .layout,
+  & > .layout .page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  & > .layout,
+  & > .layout .page {
+    flex: 1;
+  }
+
+  & > .layout {
+    padding-top: $header-height;
+  }
+
+  .page {
+    padding-top: calc(24 / 18) * 1rem;
+  }
+}
+
+@import "../module/header";

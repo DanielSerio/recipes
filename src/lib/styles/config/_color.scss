@@ -1,0 +1,55 @@
+$red: #ee4266;
+$red-contrast: white;
+$purple: #9a46a2;
+$purple-contrast: white;
+$blue: #454ade;
+$blue-contrast: white;
+$green: #32e875;
+$green-contrast: black;
+$yellow: #f0c808;
+$yellow-contrast: black;
+
+$default: #707070;
+
+$brand: $blue;
+$dark-shade: #170312;
+$light-shade: #fbfbfb;
+$light-accent: #96c3ce;
+$light-accent-contrast: black;
+$dark-accent: #ed6a5a;
+$dark-accent-contrast: white;
+
+$light-danger: #ca2f49;
+$light-danger-contrast: white;
+$dark-danger: #f391a1;
+$dark-danger-contrast: black;
+
+$light-warning: #f0c808;
+$light-warning-contrast: black;
+$dark-warning: #fbe889;
+$dark-warning-contrast: black;
+
+$light-success: $green;
+$light-success-contrast: black;
+$dark-success: #91f3b5;
+$dark-success-contrast: black;
+
+$light-primary: #454ade;
+$light-primary-contrast: white;
+$dark-primary: #a8abf0;
+$dark-primary-contrast: black;
+
+$light-purple: $purple;
+$light-purple-contrast: white;
+$dark-purple: #d6a9da;
+$dark-purple-contrast: black;
+
+$light-background-color: mix($light-shade, white, 60%);
+$light-text-color: mix($dark-shade, $default, 90%);
+$light-link-color: $light-primary;
+$light-link-visited-color: $light-purple;
+
+$dark-background-color: $dark-shade;
+$dark-text-color: mix($light-shade, $default, 90%);
+$dark-link-color: $dark-primary;
+$dark-link-visited-color: $dark-purple;

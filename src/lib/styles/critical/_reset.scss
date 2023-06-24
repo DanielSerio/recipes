@@ -1,0 +1,19 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+html,
+body,
+body > div:first-of-type {
+  height: 0;
+  position: static;
+  overflow: visible;
+  width: 100vw;
+  max-width: 100%;
+}

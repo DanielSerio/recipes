@@ -1,0 +1,41 @@
+@import "../config.scss";
+
+.api-table-root .api-table {
+  font-size: calc(12 / 18) * 1rem;
+  @media screen and (max-width: 768px) {
+    .col-name {
+      display: flex;
+      align-items: center;
+    }
+    thead {
+      height: 0;
+      overflow-y: hidden;
+      padding: 0;
+      margin: 0;
+      line-height: 0;
+    }
+    table,
+    tbody,
+    tbody tr {
+      display: flex;
+      flex-direction: column;
+    }
+
+    tbody {
+      gap: calc(12 / 18) * 1rem;
+    }
+
+    .t-cell {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .light .api-table tbody tr {
+    border: 1px solid darken($light-shade, 12%);
+  }
+  .light .api-table tbody tr td:nth-child(even) {
+    background: darken($light-shade, 2%);
+  }
+}

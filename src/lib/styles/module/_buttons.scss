@@ -1,0 +1,60 @@
+@import "../config.scss";
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.light .btn {
+  @include button-base();
+
+  &:disabled {
+  }
+
+  &:not(:disabled) {
+    &.btn-filled {
+      @include filled-button(default, $default, white);
+      @include filled-button(primary, $light-primary, $light-primary-contrast);
+      @include filled-button(success, $light-success, $light-success-contrast);
+      @include filled-button(warning, $light-warning, $light-warning-contrast);
+      @include filled-button(danger, $light-danger, $light-danger-contrast);
+    }
+  }
+}
+
+.dark .btn {
+  @include button-base();
+
+  &:disabled {
+    background: mix($dark-shade, $default, 35%);
+    color: white;
+    opacity: 0.4;
+  }
+
+  &:not(:disabled) {
+    &.btn-filled {
+      @include filled-button(default, $default, white, dark);
+      @include filled-button(primary, $dark-primary, $dark-primary-contrast, dark);
+      @include filled-button(success, $dark-success, $dark-success-contrast, dark);
+      @include filled-button(warning, $dark-warning, $dark-warning-contrast, dark);
+      @include filled-button(danger, $dark-danger, $dark-danger-contrast, dark);
+    }
+  }
+}
+
+.btn-async {
+  display: flex;
+  gap: 1ch;
+
+  .icon {
+    transform-origin: center center;
+
+    &.spinning {
+      animation: spin 350ms linear infinite;
+    }
+  }
+}

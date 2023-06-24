@@ -1,0 +1,115 @@
+@import "../config.scss";
+
+.api-table-root {
+  position: relative;
+  height: 100%;
+  flex: 1;
+  margin-bottom: calc(24 / 18) * 1rem;
+  margin-right: calc(24 / 18) * 1rem;
+}
+
+.api-table-wrap {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  .t-cell.head {
+    text-align: left;
+
+    &.short {
+      width: calc(96 / 18) * 1rem;
+    }
+  }
+}
+
+.api-table-header {
+  .link-toolbar {
+    display: flex;
+    padding: 0;
+    gap: calc(12 / 18) * 1rem;
+    list-style: none;
+
+    li {
+      background: $brand;
+      border-radius: calc(3 / 18) * 1rem;
+
+      padding: 0.5ch 1ch;
+      a,
+      a:visited {
+        color: white;
+        display: flex;
+        gap: calc(8 / 18) * 1rem;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.api-table {
+  flex: 1;
+  overflow: auto;
+
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td {
+    &.short {
+      width: calc(96 / 18) * 1rem;
+    }
+  }
+
+  .t-cell {
+    padding: calc(2 / 18) * 1rem calc(8 / 18) * 1rem;
+  }
+
+  .col-name {
+    display: none;
+  }
+}
+
+.api-table-header {
+  &,
+  .title,
+  .title h1 {
+    display: flex;
+    align-items: center;
+  }
+
+  .title {
+    h1 {
+      gap: calc(8 / 18) * 1rem;
+      margin-bottom: 0;
+    }
+
+    .icon {
+      height: calc(48 / 18) * 1rem;
+      width: calc(48 / 18) * 1rem;
+      display: grid;
+      place-content: center;
+      font-size: calc(30 / 18) * 1rem;
+    }
+  }
+}
+@import "./api-table-table";
+@import "./api-table-paging";
+@import "./record-delete-button";
+
+@media screen and (min-width: 768px) {
+  .api-table table th:first-of-type,
+  .api-table table tr td:first-of-type {
+    width: calc(96 / 18) * 1rem;
+  }
+  .light .api-table tbody tr {
+    border-top: 1px solid darken($light-shade, 12%);
+    border-bottom: 1px solid darken($light-shade, 12%);
+  }
+  .light .api-table tbody tr:nth-child(even) {
+    background: darken($light-shade, 2%);
+  }
+}

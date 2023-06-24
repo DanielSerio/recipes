@@ -1,0 +1,129 @@
+Table expired_token {
+  stored_at timestamp [NOT NULL , default: "`CURRENT_TIMESTAMP`"]
+  token_value varchar(700) [NOT NULL ]
+
+  indexes {
+    token_value [pk]
+  }
+}
+Table anonymous_user_account {
+  anonymous_user_account_id char(32) [NOT NULL , default: "`UUID()`"]
+  created_at timestamp [NOT NULL , default: "`CURRENT_TIMESTAMP`"]
+  associated_with_account tinyint(1) [NOT NULL , default: "0"]
+
+  indexes {
+    anonymous_user_account_id [pk]
+  }
+}
+Table user_account {
+  user_account_id char(32) [NOT NULL , default: "`UUID()`"]
+  created_at timestamp [NOT NULL , default: "`CURRENT_TIMESTAMP`"]
+  updated_at timestamp [NULL ]
+  email varchar(255) [NOT NULL , unique]
+  account_pass text [NOT NULL ]
+  first_name varchar(32) [NULL ]
+  last_name varchar(32) [NULL ]
+  profile_img_url varchar(512) [NOT NULL , default: "/img/defaults/user.svg"]
+  account_confirmed tinyint(1) [NOT NULL , default: "0"]
+
+  indexes {
+    user_account_id [pk]
+  }
+}
+Table recipe {
+  recipe_id char(32) [NOT NULL , default: "`UUID()`"]
+  created_at timestamp [NOT NULL , default: "`CURRENT_TIMESTAMP`"]
+  updated_at timestamp [NULL ]
+  created_by_user char(32) [NOT NULL , ref: > user_account.user_account_id]
+  recipe_title varchar(128) [NOT NULL , unique]
+  recipe_desc text [NULL ]
+  cover_img_url text [NULL ]
+  thumbnail_img_url varchar(255) [NULL ]
+  slug_url char(8) [NOT NULL , unique]
+
+  indexes {
+    recipe_id [pk]
+  }
+}
+Table recipe_book {
+  recipe_book_id char(32) [NOT NULL , default: "`UUID()`"]
+  created_at timestamp [NOT NULL , default: "`CURRENT_TIMESTAMP`"]
+  updated_at timestamp [NULL ]
+  created_by_user char(32) [NOT NULL , ref: > user_account.user_account_id]
+  book_name varchar(128) [NOT NULL , unique]
+  book_desc text [NULL ]
+  thumbnail_img_url text [NOT NULL , default: "/img/defaults/book-thumb.svg"]
+  cover_img_url text [NOT NULL , default: "/img/defaults/book.svg"]
+  slug_url char(8) [NOT NULL , unique]
+
+  indexes {
+    recipe_book_id [pk]
+  }
+}
+Table recipe_book_recipe {
+  recipe_book_id char(32) [NOT NULL , ref: > recipe_book.recipe_book_id]
+  recipe_id char(32) [NOT NULL , ref: > recipe.recipe_id]
+  publish_at timestamp [NULL ]
+
+  indexes {
+    (recipe_book_id,recipe_id) [pk]
+  }
+}
+Table recipe_book_user_account {
+  recipe_book_id char(32) [NOT NULL , ref: > recipe_book.recipe_book_id]
+  user_account_id char(32) [NOT NULL , ref: > user_account.user_account_id]
+  member_status tinyint(1) [NOT NULL , default: "0"]
+
+  indexes {
+    (recipe_book_id,user_account_id) [pk]
+  }
+}
+Table ingredient {
+  ingredient_id char(32) [NOT NULL , default: "`UUID()`"]
+  created_at timestamp [NOT NULL , default: "`CURRENT_TIMESTAMP`"]
+  updated_at timestamp [NULL ]
+  created_by_user char(32) [NOT NULL , ref: > user_account.user_account_id]
+  ingredient_name varchar(32) [NOT NULL ]
+  thumbnail_img_url text [NOT NULL , default: "/img/defaults/ingredient.svg"]
+
+  indexes {
+    ingredient_id [pk]
+  }
+}
+Table recipe_ingredient {
+  recipe_id char(32) [NOT NULL , ref: > recipe.recipe_id]
+  ingredient_id char(32) [NOT NULL , ref: > ingredient.ingredient_id]
+  uom_id char(32) [NOT NULL , ref: > uom.uom_id]
+  uom_quantity decimal(6,3) [NOT NULL ]
+
+  indexes {
+    (recipe_id,ingredient_id) [pk]
+  }
+}
+Table uom {
+  uom_id char(32) [NOT NULL , default: "`UUID()`"]
+  uom_name varchar(32) [NOT NULL , unique]
+  uom_abbv varchar(5) [NOT NULL , unique]
+
+  indexes {
+    uom_id [pk]
+  }
+}
+Table step_item {
+  step_item_id char(32) [NOT NULL , default: "`UUID()`"]
+  step_text text [NOT NULL ]
+  step_img_url text [NULL ]
+
+  indexes {
+    step_item_id [pk]
+  }
+}
+Table recipe_step_item {
+  recipe_id char(32) [NOT NULL , ref: > recipe.recipe_id]
+  step_item_id char(32) [NOT NULL , ref: > step_item.step_item_id]
+  step_item_order integer [NOT NULL , unique]
+
+  indexes {
+    (recipe_id,step_item_id) [pk]
+  }
+}

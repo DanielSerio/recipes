@@ -1,0 +1,16 @@
+@import "./units";
+
+@mixin button-base {
+  appearance: none;
+  outline: none;
+  border: 1px solid transparent;
+  border-radius: calc(3 / 18) * 1rem;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: $control-line-height;
+  padding: 0 1ch;
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+}

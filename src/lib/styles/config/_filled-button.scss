@@ -1,0 +1,14 @@
+@mixin filled-button($name, $color, $contrast-color, $theme: light) {
+  &.#{$name} {
+    background: $color;
+    color: $contrast-color;
+
+    &:hover {
+      @if ($theme == light) {
+        background: darken($color, 12%);
+      } @else {
+        background: lighten($color, 12%);
+      }
+    }
+  }
+}

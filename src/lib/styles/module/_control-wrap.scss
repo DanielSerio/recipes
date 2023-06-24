@@ -1,0 +1,67 @@
+@import "../config.scss";
+
+.control-wrap {
+  position: relative;
+  display: flex;
+  height: $control-line-height;
+
+  &,
+  input,
+  button {
+    border-radius: calc(3 / 18) * 1rem;
+  }
+
+  input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-left: 1ch;
+    border: 1px solid;
+    padding-right: $control-line-height;
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  button {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    top: -1px;
+    right: -1px;
+    width: $control-line-height;
+    height: $control-line-height;
+    display: grid;
+    place-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    opacity: 0.4;
+  }
+
+  input,
+  button {
+    outline: none;
+    color: inherit;
+  }
+
+  &:hover button,
+  button:active,
+  button:focus {
+    opacity: 1;
+  }
+}
+
+.light .control-wrap {
+  input:focus,
+  button:focus {
+    box-shadow: 0 0 0 3px $light-primary;
+  }
+}
+.dark .control-wrap {
+  input:focus,
+  button:focus {
+    box-shadow: 0 0 0 3px $dark-primary;
+  }
+}

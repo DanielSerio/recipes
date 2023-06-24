@@ -1,0 +1,25 @@
+@import "../config.scss";
+.dashboard-layout {
+  $page-margin: calc(24 / 18) * 1rem;
+  padding-left: calc($aside-minimized-width + $page-margin);
+
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex: 1;
+  }
+
+  .dashboard-page-header {
+    display: flex;
+
+    max-width: calc(960 / 18) * 1rem;
+    width: calc(100% - 24px);
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto calc(24 / 18) * 1rem;
+    h1 {
+      margin: 0;
+    }
+  }
+}

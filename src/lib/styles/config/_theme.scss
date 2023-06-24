@@ -1,0 +1,49 @@
+@mixin base-theme($name: light) {
+  $background-color: $light-background-color;
+  $text-color: $light-text-color;
+  $link-color: $light-link-color;
+  $link-visited-color: $light-link-visited-color;
+
+  $input-border-color: mix($light-shade, $default);
+  $input-border-hover-color: mix($default, $light-shade, 75%);
+
+  @if ($name == dark) {
+    $background-color: $dark-background-color;
+    $text-color: $dark-text-color;
+    $link-color: $dark-link-color;
+    $link-visited-color: $dark-link-visited-color;
+    $input-border-color: mix($dark-shade, $default);
+    $input-border-hover-color: mix($default, $dark-shade, 75%);
+  }
+
+  background: $background-color;
+  color: $text-color;
+
+  a {
+    color: $link-color;
+
+    &:visited {
+      color: $link-visited-color;
+    }
+  }
+
+  input,
+  select,
+  textarea {
+    border: 1px solid;
+    border-color: $input-border-color;
+    background: $background-color;
+    color: inherit;
+
+    &:not(:disabled):hover {
+      border-color: $input-border-hover-color;
+    }
+  }
+
+  input,
+  select {
+    line-height: $control-line-height;
+    max-height: $control-line-height;
+    border-radius: calc(2 / 18) * 1rem;
+  }
+}

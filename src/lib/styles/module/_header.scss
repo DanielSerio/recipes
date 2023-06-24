@@ -1,0 +1,22 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  backdrop-filter: blur(6px);
+
+  .header-container {
+    height: $header-height;
+  }
+}
+
+.light .header {
+  background: rgba(white, 0.8);
+  border-bottom: 1px solid darken($light-shade, 6%);
+}
+
+.dark .header {
+  background: rgba(desaturate(lighten($dark-shade, 8%), 60%), 0.8);
+  color: white;
+  border-bottom: 1px solid darken($dark-shade, 6%);
+}

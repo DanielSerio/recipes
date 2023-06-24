@@ -1,0 +1,9 @@
+@import "../config.scss";
+
+.light .layout {
+  @include base-theme(light);
+}
+
+.dark .layout {
+  @include base-theme(dark);
+}

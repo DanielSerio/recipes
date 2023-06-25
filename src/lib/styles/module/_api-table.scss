@@ -81,6 +81,8 @@
 }
 
 .api-table-header {
+  display: flex;
+  flex-direction: column;
   &,
   .title,
   .title h1 {
@@ -107,8 +109,17 @@
 @import "./api-table-paging";
 @import "./record-delete-button";
 @import "./api-table-sort-btn";
+@import "./api-table-filtering";
 
 @media screen and (min-width: 768px) {
+  .api-table-header {
+    flex-direction: row;
+    justify-content: space-between;
+
+    .link-toolbar {
+      margin-right: 0;
+    }
+  }
   .api-table table th:first-of-type,
   .api-table table tr td:first-of-type {
     width: calc(96 / 18) * 1rem;

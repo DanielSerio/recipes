@@ -1,0 +1,104 @@
+.api-table-filtering {
+  margin: 0 auto calc(12 / 18) * 1rem;
+  max-width: calc(768 / 18) * 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+
+  .applied-filter-lines {
+    margin: calc(12 / 18) * 1rem auto;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    width: 100%;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      gap: calc(6 / 18) * 1rem;
+
+      b {
+        font-size: 1.25rem;
+        font-weight: 200;
+        font-family: $serif-font-family;
+      }
+
+      button {
+        height: $control-line-height;
+        width: $control-line-height;
+        display: grid;
+        place-content: center;
+      }
+
+      .radio-group {
+        margin: calc(6 / 18) auto;
+      }
+    }
+  }
+
+  .filter-add-line {
+    display: flex;
+    gap: calc(6 / 18) * 1rem;
+    flex-direction: column;
+
+    .btn-filled {
+      font-size: calc(14 / 18) * 1rem;
+      max-height: $control-line-height;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .api-table-filtering {
+    align-items: center;
+  }
+  .api-table-filtering .filter-add-line {
+    flex-direction: row;
+
+    .radio-group {
+      transform: translateY(-3px);
+    }
+  }
+  .api-table-filtering .applied-filter-lines li {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    b {
+      display: inline-flex;
+      min-width: calc(68 / 18) * 1rem;
+    }
+
+    .radio-group {
+      margin: 0;
+    }
+  }
+}
+
+.light .api-table-filtering {
+  .radio-group {
+    .radio-control {
+      &:first-of-type {
+        background: $blue;
+        border-color: $blue;
+        color: white;
+      }
+
+      &:last-of-type {
+        background: $yellow;
+        border-color: $yellow;
+        color: black;
+      }
+    }
+  }
+
+  .applied-filter-lines li button {
+    background: $light-danger;
+    color: white;
+    border: none;
+    border-radius: calc(3 / 18) * 1rem;
+  }
+}

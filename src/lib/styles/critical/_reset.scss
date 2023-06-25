@@ -1,3 +1,5 @@
+@import "../config.scss";
+
 *,
 *::before,
 *::after {
@@ -16,4 +18,92 @@ body > div:first-of-type {
   overflow: visible;
   width: 100vw;
   max-width: 100%;
+}
+
+input,
+select {
+  appearance: textfield;
+  outline: none;
+  height: $control-line-height;
+  padding: 0 1.5ch;
+  border-radius: calc(3 / 18) * 1rem;
+}
+
+.radio-group {
+  display: flex;
+  gap: calc(6 / 18) * 1rem;
+  padding: calc(3 / 18) * 1rem;
+
+  .radio-control {
+    border: 1px solid;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: calc(14 / 18) * 1rem;
+    align-items: center;
+    gap: calc(4 / 18) * 1rem;
+    padding: 0 1.5ch;
+    height: $control-line-height;
+    border-radius: calc(3 / 18) * 1rem;
+    position: relative;
+    min-width: 8ch;
+
+    label {
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      display: grid;
+      place-content: center;
+      z-index: 0;
+      transition: all 80ms ease;
+
+      &::after {
+        top: 0;
+        width: 100%;
+        left: 0;
+        content: " ";
+        transition: height 80ms ease;
+        position: absolute;
+        height: 0;
+        width: 100%;
+        z-index: 0;
+        opacity: 0.6;
+        cursor: pointer;
+      }
+    }
+
+    input {
+      appearance: none;
+      height: 0;
+      width: 0;
+      padding: 0;
+      margin: 0;
+      line-height: 0;
+      opacity: 0;
+    }
+
+    input:checked + label {
+      border-radius: calc(3 / 18) * 1rem;
+    }
+
+    input:not(:checked) + label::after {
+      height: 100%;
+    }
+  }
+}
+
+.light .api-table-root .api-table-filtering {
+  input:checked + label {
+    box-shadow: 0 0 0 3px saturate(lighten($light-primary, 30%), 100%);
+    border-radius: calc(3 / 18) * 1rem;
+  }
+
+  input:not(:checked) + label {
+    background: $light-shade;
+    opacity: 0.6;
+    color: black;
+  }
 }

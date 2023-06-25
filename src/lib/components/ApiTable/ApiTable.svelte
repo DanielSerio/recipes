@@ -5,13 +5,15 @@
 	import RecordDeleteButton from './RecordDeleteButton.svelte';
 	import useApiTable from '$lib/hooks/api-table';
 	import ColumnSortButton from './ColumnSortButton.svelte';
+	import ApiTableFiltering from './ApiTableFiltering.svelte';
 
 	export let entityIcon: string;
 	export let entityName: string;
 	export let url: string;
 	export let deleteColumnKey: string;
 	export let fields: App.ApiTableField[];
-	const { resultStore, refresh, pagingStore, sortingStore } = useApiTable(entityName);
+	const { resultStore, refresh, pagingStore, sortingStore, filteringStore } =
+		useApiTable(entityName);
 
 	function applyTransforms(
 		field: App.ApiTableField,
@@ -77,6 +79,7 @@
 				</li>
 			</ul>
 		</header>
+		<ApiTableFiltering {filteringStore} {fields} {refresh} />
 		<div class="api-table">
 			<div class="table-wrap">
 				<table>

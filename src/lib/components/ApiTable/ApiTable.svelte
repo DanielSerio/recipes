@@ -4,13 +4,14 @@
 	import ApiTablePaging from './ApiTablePaging.svelte';
 	import RecordDeleteButton from './RecordDeleteButton.svelte';
 	import useApiTable from '$lib/hooks/api-table';
+	import ColumnSortButton from './ColumnSortButton.svelte';
 
 	export let entityIcon: string;
 	export let entityName: string;
 	export let url: string;
 	export let deleteColumnKey: string;
 	export let fields: App.ApiTableField[];
-	const { resultStore, refresh, pagingStore } = useApiTable(entityName);
+	const { resultStore, refresh, pagingStore, sortingStore } = useApiTable(entityName);
 
 	function applyTransforms(
 		field: App.ApiTableField,
@@ -87,7 +88,12 @@
 							{#each fields as field}
 								<th>
 									<div class="t-cell head {field.short ? 'short' : ''}">
-										{field.title}
+										<span class="text">
+											{field.title}
+										</span>
+										<span class="actions">
+											<ColumnSortButton column={field.column} {sortingStore} {refresh} />
+										</span>
 									</div>
 								</th>
 							{/each}

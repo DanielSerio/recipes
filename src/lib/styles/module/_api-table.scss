@@ -18,6 +18,13 @@
 
   .t-cell.head {
     text-align: left;
+    display: flex;
+    gap: calc(3 / 18) * 1rem;
+    align-items: center;
+
+    .actions {
+      display: flex;
+    }
 
     &.short {
       width: calc(96 / 18) * 1rem;
@@ -99,6 +106,7 @@
 @import "./api-table-table";
 @import "./api-table-paging";
 @import "./record-delete-button";
+@import "./api-table-sort-btn";
 
 @media screen and (min-width: 768px) {
   .api-table table th:first-of-type,

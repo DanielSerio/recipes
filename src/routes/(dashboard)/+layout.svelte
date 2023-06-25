@@ -5,6 +5,7 @@
 	import '$lib/styles/module/_dashboard-nav-item.scss';
 	import '$lib/styles/module/_api-table.scss';
 	import '$lib/styles/module/_single-file-drop.scss';
+	import '$lib/styles/module/_dashboard-card.scss';
 </script>
 
 <div class="layout dashboard-layout">

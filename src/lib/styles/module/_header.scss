@@ -4,6 +4,7 @@
   left: 0;
   width: 100vw;
   backdrop-filter: blur(6px);
+  z-index: 5000;
 
   .header-container {
     height: $header-height;

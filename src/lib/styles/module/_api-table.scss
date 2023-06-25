@@ -16,6 +16,10 @@
   width: 100%;
   overflow: hidden;
 
+  th {
+    font-weight: 400;
+  }
+
   .t-cell.head {
     text-align: left;
     display: flex;

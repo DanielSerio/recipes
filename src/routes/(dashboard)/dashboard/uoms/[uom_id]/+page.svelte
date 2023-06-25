@@ -34,7 +34,9 @@
 <div class="page uom-edit-page">
 	<main id="content" class="main-content">
 		<header class="dashboard-page-header">
-			<h1 class="h3">UOM &raquo {data.uom_id}</h1>
+			{#if uomRecord}
+				<h1 class="h3">UOM &raquo {name}</h1>
+			{/if}
 			<a href="/dashboard/uoms">Back</a>
 		</header>
 		{#if responseError}

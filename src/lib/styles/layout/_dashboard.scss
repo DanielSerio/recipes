@@ -12,14 +12,48 @@
 
   .dashboard-page-header {
     display: flex;
-
+    flex-direction: column;
+    gap: calc(24 / 18) * 1rem;
     max-width: calc(960 / 18) * 1rem;
     width: calc(100% - 24px);
+    transform: translateX(-12px);
     align-items: center;
     justify-content: space-between;
     margin: 0 auto calc(24 / 18) * 1rem;
     h1 {
       margin: 0;
     }
+  }
+}
+
+.form.dashboard-form {
+  width: calc(100% - 24px);
+  transform: translateX(-12px);
+  max-width: 768px;
+}
+
+@media screen and (min-width: 768px) {
+  .dashboard-layout .dashboard-page-header {
+    flex-direction: row;
+    gap: 0;
+  }
+}
+
+.dashboard-layout .dashboard-page-header {
+  a {
+    height: $control-line-height;
+    text-decoration: none;
+    padding: 0 1ch;
+    display: flex;
+    align-items: center;
+    border-radius: calc(3 / 18) * 1rem;
+  }
+}
+
+.light .dashboard-layout .dashboard-page-header {
+  a,
+  a:visited {
+    background: $light-primary;
+    color: white;
   }
 }

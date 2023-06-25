@@ -1,9 +1,74 @@
 .api-table-paging {
-  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  gap: calc(6 / 18) * 1rem;
 
   &,
-  .paging-area {
+  .paging-area,
+  .records-area {
     display: flex;
     align-items: center;
+  }
+
+  .records-area {
+    justify-content: flex-end;
+    gap: calc(8 / 18) * 1rem;
+    width: 100%;
+    .text {
+      font-size: calc(14 / 18) * 1rem;
+    }
+  }
+
+  .paging-area {
+    gap: calc(3 / 18) * 1rem;
+
+    .page-area {
+      display: flex;
+      align-items: center;
+      padding: 0 calc(12 / 18) * 1rem;
+
+      .page-input {
+        min-width: 4ch;
+        width: 6ch;
+        text-align: center;
+        border-radius: calc(3 / 18) * 1rem;
+        margin-right: 1ch;
+      }
+
+      .muted {
+        opacity: 0.67;
+      }
+    }
+  }
+
+  button {
+    height: $control-line-height;
+    width: $control-line-height;
+    border: none;
+    color: white;
+
+    &:disabled {
+      background: transparent;
+      color: black;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .api-table-paging {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0;
+
+    .records-area {
+      width: fit-content;
+    }
+  }
+}
+
+.light .api-table-paging {
+  button:not(:disabled) {
+    background: $light-primary;
+    border-radius: calc(3 / 18) * 1rem;
   }
 }
